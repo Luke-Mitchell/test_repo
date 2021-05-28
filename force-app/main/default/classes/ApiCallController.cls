@@ -1,6 +1,6 @@
 public with sharing class ApiCallController {
     
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<Object> callEndpoint(String endPoint) {
         Http http = new Http();
         HttpRequest request = new HttpRequest();
