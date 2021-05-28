@@ -1,7 +1,7 @@
 public with sharing class ApiCallController {
     
+    @AuraEnabled(cacheable=true)
     public static List<Object> callEndpoint(String endPoint) {
-        //https://enr7thjj1rpu72t.m.pipedream.net
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         request.setEndpoint(endPoint);
@@ -10,8 +10,8 @@ public with sharing class ApiCallController {
         // If the request is successful, parse the JSON response.
         if (response.getStatusCode() == 200) {
     
-            List<Object> peopleList = (List<Object>)JSON.deserializeUntyped(response.getBody());
-            
+            List<Object> peopleList = (List<Object>)JSON.deserializeUntyped(response.getBody() );
+
             return peopleList;
 
             // for(Object record : peopleList){    
@@ -19,6 +19,9 @@ public with sharing class ApiCallController {
                     
             //     system.debug(person.get('name'));
             // }
+            
+        } else {
+            return null;
         }
 
     }
